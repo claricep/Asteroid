@@ -23,8 +23,7 @@ public class Asteroid {
 	public Asteroid() {
 		x = (int)Math.floor(Math.random()*(max-min+1)+min); //randomize location of asteroid
 		y = 0;
-		//img = getImage("/imgs/alien1.png");//load the image for Tree
-		img = getImage("/imgs/alien2.png");
+		img = getImage("/imgs/invader.gif");//load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
 	}
@@ -62,7 +61,7 @@ public class Asteroid {
     	y += vy;
     	
     	tx.setToTranslation(x, y);
-		tx.scale(1 , 1);
+		tx.scale(.1 , .1);
     }
     
     private void init(double a, double b) {
