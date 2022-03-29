@@ -76,13 +76,17 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//ship hit box
 		//g.drawRect(spaceship.getX(), spaceship.getY(), 45, 45);
+		
+		//Invader hit box
+	//	g.drawRect(asteroid.getX(), asteroid.getY(), 45, 45);
+		 
 		 
 		//create asteroids
 			for(int i = 0; i < asteroid.size(); i ++) {
 				Asteroid a = (Asteroid) asteroid.get(i);
 				a.paint(g);
 				//asteroid hit box
-				//g.drawRect(a.x + 10 , a.y + 10, 80, 80);
+				g.drawRect(a.x + 10 , a.y + 10, 80, 80);
 					
 					//collision between spaceship and asteroid	
 					if(spaceship.getX() < a.getX() + 80 && spaceship.getX() + 45 > a.getX()){
