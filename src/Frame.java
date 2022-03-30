@@ -74,10 +74,20 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			g.drawRect(l.getX(), l.getY(), 12, 12);
 		}
 		
+<<<<<<< HEAD
 		//ufo hit box
 		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
 		
+=======
+		//ship hit box
+		//g.drawRect(spaceship.getX(), spaceship.getY(), 45, 45);
+		
+		//Invader hit box
+	//	g.drawRect(asteroid.getX(), asteroid.getY(), 45, 45);
 		 
+>>>>>>> refs/remotes/origin/master
+		 
+<<<<<<< HEAD
 		 
 		//create invader
 			for(int i = 0; i < invader.size(); i ++) {
@@ -85,6 +95,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				v.paint(g);
 				//invader hit box
 				g.drawRect(v.x + 7 , v.y + 1, 40, 40);
+=======
+		//create asteroids
+			for(int i = 0; i < asteroid.size(); i ++) {
+				Asteroid a = (Asteroid) asteroid.get(i);
+				a.paint(g);
+				//asteroid hit box
+				g.drawRect(a.x + 10 , a.y + 10, 80, 80);
+>>>>>>> refs/remotes/origin/master
 					
 					//collision between ufo and invader	
 					if(ufo.getX() < v.getX() + 80 && ufo.getX() + 45 > v.getX()){
