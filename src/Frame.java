@@ -19,15 +19,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	//CREATE THE OBJECT (STEP 1) 
 	Background bg = new Background(0, 10);
-	Spaceship spaceship = new Spaceship(225, 450);
-	private ArrayList<Asteroid> asteroid = new ArrayList<Asteroid>();
-	ArrayList lasers = spaceship.getLaser();
+	UFO ufo = new UFO(225, 450);
+	private ArrayList<Invader> invader = new ArrayList<Invader>();
+	ArrayList lasers = ufo.getLaser();
 
 	public static int score = 0;
 	
 	public void spawn() {
-		Asteroid i = new Asteroid();
-		asteroid.add(i);
+		Invader i = new Invader();
+		invader.add(i);
 	}
 	
 	public void shoot() {
@@ -40,19 +40,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//paint objects
 				bg.paint(g);
-				spaceship.paint(g);
+				ufo.paint(g);
 				
 		//start screen
 		Font f1 = new Font(Font.SANS_SERIF, Font.BOLD, 20);
 		g.setFont(f1);
-		if(Spaceship.stop) {
+		if(UFO.stop) {
 			g.setColor(Color.WHITE);   
 			g.drawString("Press 'Enter' to start", 130 , 250);
 		}
 		
 		Font f2 = new Font(Font.SANS_SERIF, Font.ITALIC, 15);
 		g.setFont(f2);
-		if(Spaceship.stop) {
+		if(UFO.stop) {
 			g.setColor(Color.WHITE);   
 			g.drawString("Use 'space bar' to shoot", 140 , 280);
 		}
@@ -60,7 +60,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//score
 		Font gg = new Font(Font.SANS_SERIF, Font.BOLD, 15);
 		g.setFont(gg);
-		if(Spaceship.stop == false) {
+		if(UFO.stop == false) {
 			g.setColor(Color.WHITE);   
 			g.drawString("Score : " + score + "", 20 , 30);
 		}
@@ -71,41 +71,41 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			Laser l = (Laser) lasers.get(i);
 			l.paint(g);	
 			//laser hit box
-			//g.drawRect(l.getX(), l.getY(), 12, 12);
+			g.drawRect(l.getX(), l.getY(), 12, 12);
 		}
 		
-		//ship hit box
-		//g.drawRect(spaceship.getX(), spaceship.getY(), 45, 45);
+		//ufo hit box
+		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
 		
 		 
 		 
-		//create asteroids
-			for(int i = 0; i < asteroid.size(); i ++) {
-				Asteroid a = (Asteroid) asteroid.get(i);
-				a.paint(g);
+		//create invader
+			for(int i = 0; i < invader.size(); i ++) {
+				Invader v = (Invader) invader.get(i);
+				v.paint(g);
 				//invader hit box
-				g.drawRect(a.x + 10 , a.y + 1, 40, 25);
+				g.drawRect(v.x + 7 , v.y + 1, 40, 40);
 					
-					//collision between spaceship and asteroid	
-					if(spaceship.getX() < a.getX() + 80 && spaceship.getX() + 45 > a.getX()){
-						if(spaceship.getY() + 45 > a.getY() && spaceship.getY() < a.getY() + 35){
-							asteroid.remove(i);
-							spaceship.reset(); //set ship back to center ad set score to 0
+					//collision between ufo and invader	
+					if(ufo.getX() < v.getX() + 80 && ufo.getX() + 45 > v.getX()){
+						if(ufo.getY() + 45 > v.getY() && ufo.getY() < v.getY() + 35){
+							invader.remove(i);
+							ufo.reset(); //set ship back to center ad set score to 0
 						}
 					}
 			
 		}	
 			
-		//collision between laser and asteroid	
-		 if(! (asteroid.size() == 0) && !(lasers.size() == 0)) {
+		//collision between laser and invader	
+		 if(! (invader.size() == 0) && !(lasers.size() == 0)) {
 			 for(int i = 0; i < lasers.size();i++) {
-				 for(int p = 0; p < asteroid.size() && i < lasers.size(); p++) {
+				 for(int p = 0; p < invader.size() && i < lasers.size(); p++) {
 					 Laser tempL = (Laser) lasers.get(i);
-					 Asteroid tempA = (Asteroid) asteroid.get(p);
+					 Invader tempA = (Invader) invader.get(p);
 					 	if(tempL.getX() < tempA.getX() + 80 && tempL.getX() + 12 > tempA.getX()){
 					 		if(tempL.getY() < tempA.getY() + 80 && tempL.getY() + 12 > tempA.getY()) {
 								lasers.remove(i);
-								asteroid.remove(p);
+								invader.remove(p);
 							 	score++;
 					 		}
 						 }
@@ -121,7 +121,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	public Frame() {
-		JFrame f = new JFrame("Asteroids");
+		JFrame f = new JFrame("Space Invader");
 		f.setSize(new Dimension(500, 600));
 		f.setBackground(Color.blue);
 		f.add(this);
@@ -178,18 +178,18 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			
 			//move left
 			if(arg0.getKeyCode()==37) { //left arrow
-				spaceship.moveL();
+				ufo.moveL();
 			}
 			if(arg0.getKeyCode()==65) { // right arrow
-				spaceship.moveL();
+				ufo.moveL();
 			}
 			
 			//move right
 			if(arg0.getKeyCode()==39) { // a key
-				spaceship.moveR();
+				ufo.moveR();
 			}
 			if(arg0.getKeyCode()==68) { //d key
-				spaceship.moveR();
+				ufo.moveR();
 			}
 			
 			//shoot laser
@@ -199,15 +199,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			
 			if(arg0.getKeyCode() == 10) { //enter key	
 				//start screen
-				Spaceship.stop = false;
-				//control asteroids to disappear when game ends
+				UFO.stop = false;
+				//control invaders to disappear when game ends
 				new Thread() {
 			        public void run(){
 						try {
 							while (true) {
-								if(Spaceship.stop==true) { //if start screen is on
-								//clear all asteroids before breaking
-									asteroid.clear();
+								if(UFO.stop==true) { //if start screen is on
+								//clear all invaders before breaking
+									invader.clear();
 									break;
 								}					
 								Thread.sleep(SleepTime.getSleepTime(200,  2200));

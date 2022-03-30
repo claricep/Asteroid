@@ -2,7 +2,7 @@
 public class SleepTime {
     public static void main(String[] args) throws Exception {
     	
-    	while(Spaceship.stop = true) { //if game is playing
+    	while(UFO.stop = true) { //if game is playing
     		int sleepTime = SleepTime.getSleepTime(200,  2500); //timer for asteroids to fall
     		System.out.println("sleep time\t" + sleepTime);  //check time intervals
     		Thread.sleep(sleepTime);

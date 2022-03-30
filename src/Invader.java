@@ -8,7 +8,7 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class Asteroid {
+public class Invader {
 
 	public  int x;
 	public int y;
@@ -20,7 +20,7 @@ public class Asteroid {
 	private int min = 10;
 	private int max = 420;
 	
-	public Asteroid() {
+	public Invader() {
 		x = (int)Math.floor(Math.random()*(max-min+1)+min); //randomize location of asteroid
 		y = 0;
 		img = getImage("/imgs/invader.gif");//load the image for Tree
@@ -52,7 +52,7 @@ public class Asteroid {
     
     public void update() {
     	//place asteroid back to the top of screen
-    	if(Spaceship.stop ) {
+    	if(UFO.stop ) {
 			vy = 0;
 			y = -120;
     	}
@@ -61,7 +61,7 @@ public class Asteroid {
     	y += vy;
     	
     	tx.setToTranslation(x, y);
-		tx.scale(.1 , .1);
+		tx.scale(.15, .15);
     }
     
     private void init(double a, double b) {

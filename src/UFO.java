@@ -10,21 +10,21 @@ import java.awt.geom.AffineTransform;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class Spaceship {
+public class UFO {
 
 	public static int x, y;
 	private int vx;
 	private Image img; 	
 	private AffineTransform tx;
 	private ArrayList<Laser> laser = new ArrayList<Laser>();
-	private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+	private ArrayList<Invader> asteroids = new ArrayList<Invader>();
 	public static boolean stop = true;
 	
 	
-	public Spaceship(int x, int y) {
+	public UFO(int x, int y) {
 		this.x = x;
 		this.y = y;
-		img = getImage("/imgs/spaceship.gif"); //load the image for Tree
+		img = getImage("/imgs/ufo.png"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); //initialize the location of the image
 	}
@@ -75,14 +75,14 @@ public class Spaceship {
 		x = -40;
 	}
 		
-	if(stop ) { //recenter spaceship and reset score
-		x = 225;
+	if(stop ) { //recenter UFO and reset score
+		x = 200;
 		this.y = 450;
 	    	Frame.score = 0;
 	}
 		
 		tx.setToTranslation(x, y);
-		tx.scale(.5 , .5);
+		tx.scale(.3 , .3);
     }
 	
     public ArrayList getLaser() {

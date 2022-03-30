@@ -18,8 +18,8 @@ public class Laser {
 	
 	
 	public Laser () {
-		x= Spaceship.x + 15;
-		y = 400;
+		x= UFO.x + 35;
+		y = 400 + 50;
 		img = getImage("/imgs/laser.png");//load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
@@ -51,8 +51,8 @@ public class Laser {
     public void shot() {
     	time += 16;
     	if(time > 6000) {
-    		x = Spaceship.x;
-    		y = Spaceship.y;
+    		x = UFO.x;
+    		y = UFO.y;
     		update();
     	}
     }
@@ -62,7 +62,7 @@ public class Laser {
     	y += vy;
     	
     	//get rid of laser when game resets
-    	if(Spaceship.stop ) {
+    	if(UFO.stop ) {
 			vy = 0;
 		}
     	
