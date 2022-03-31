@@ -71,42 +71,24 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			Laser l = (Laser) lasers.get(i);
 			l.paint(g);	
 			//laser hit box
-			g.drawRect(l.getX(), l.getY(), 12, 12);
+			//g.drawRect(l.getX(), l.getY(), 12, 12);
 		}
 		
-<<<<<<< HEAD
-		//ufo hit box
+		//UFO hit box
 		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
 		
-=======
-		//ship hit box
-		//g.drawRect(spaceship.getX(), spaceship.getY(), 45, 45);
-		
-		//Invader hit box
-	//	g.drawRect(asteroid.getX(), asteroid.getY(), 45, 45);
 		 
->>>>>>> refs/remotes/origin/master
-		 
-<<<<<<< HEAD
 		 
 		//create invader
 			for(int i = 0; i < invader.size(); i ++) {
-				Invader v = (Invader) invader.get(i);
-				v.paint(g);
-				//invader hit box
-				g.drawRect(v.x + 7 , v.y + 1, 40, 40);
-=======
-		//create asteroids
-			for(int i = 0; i < asteroid.size(); i ++) {
-				Asteroid a = (Asteroid) asteroid.get(i);
+				Invader a = (Invader) invader.get(i);
 				a.paint(g);
-				//asteroid hit box
-				g.drawRect(a.x + 10 , a.y + 10, 80, 80);
->>>>>>> refs/remotes/origin/master
+				//invader hit box
+				g.drawRect(a.x +5, a.y, 40, 43);
 					
-					//collision between ufo and invader	
-					if(ufo.getX() < v.getX() + 80 && ufo.getX() + 45 > v.getX()){
-						if(ufo.getY() + 45 > v.getY() && ufo.getY() < v.getY() + 35){
+					//collision between ufo and Invader	
+					if(ufo.getX() < a.getX() + 80 && ufo.getX() + 45 > a.getX()){
+						if(ufo.getY() + 45 > a.getY() && ufo.getY() < a.getY() + 35){
 							invader.remove(i);
 							ufo.reset(); //set ship back to center ad set score to 0
 						}
@@ -139,7 +121,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	}
 	
 	public Frame() {
-		JFrame f = new JFrame("Space Invader");
+		JFrame f = new JFrame("Space Invaders");
 		f.setSize(new Dimension(500, 600));
 		f.setBackground(Color.blue);
 		f.add(this);
@@ -218,13 +200,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			if(arg0.getKeyCode() == 10) { //enter key	
 				//start screen
 				UFO.stop = false;
-				//control invaders to disappear when game ends
+				//control invader to disappear when game ends
 				new Thread() {
 			        public void run(){
 						try {
 							while (true) {
 								if(UFO.stop==true) { //if start screen is on
-								//clear all invaders before breaking
+								//clear all invader before breaking
 									invader.clear();
 									break;
 								}					

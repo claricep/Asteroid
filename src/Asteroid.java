@@ -52,7 +52,7 @@ public class Asteroid {
     
     public void update() {
     	//place asteroid back to the top of screen
-    	if(Spaceship.stop ) {
+    	if(UFO.stop ) {
 			vy = 0;
 			y = -120;
     	}
