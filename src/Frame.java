@@ -93,7 +93,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				
 				
 				a.paint(g);
-				//invader hit box
+				//invader hit boxxx
 				g.drawRect(a.x +5, a.y, 40, 43);
 					
 					//collision between ufo and Invader	
