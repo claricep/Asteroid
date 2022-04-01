@@ -77,12 +77,16 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//UFO hit box
 		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
 		
-		 
-		 
 		//create invader
 			for(int i = 0; i < invader.size(); i ++) {
 				Invader a = (Invader) invader.get(i);
 				a.paint(g);
+				
+				//bounce off walls
+				if(a.getX() > 400 || (a.getX() < 100)) {
+		    	  //  invader.getVx = -1;
+		    	}
+				
 				//invader hit box
 				g.drawRect(a.x +5, a.y, 40, 43);
 					

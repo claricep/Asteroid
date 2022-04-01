@@ -89,8 +89,8 @@ public class UFO {
     	return laser;
     }
     
-    public ArrayList getAsteroids() {
-    	return asteroids;
+    public ArrayList getInvader() {
+    	return invader;
     }
       
     private void init(double a, double b) {
