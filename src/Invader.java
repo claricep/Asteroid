@@ -21,11 +21,20 @@ public class Invader {
 	private int max = 420;
 	
 	public Invader() {
-		x = (int)Math.floor(Math.random()*(max-min+1)+min); //randomize location of asteroid
+		x = 50;       //(int)Math.floor(Math.random()*(max-min+1)+min); //randomize location of asteroid
 		y = 0;
 		img = getImage("/imgs/invader.gif");//load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
+		
+		 
+	}
+	
+	public Invader(int newX, int newY) {
+		x = newX;
+		y = newY;
+				 
+				
 	}
 	
 	public void paint(Graphics g) {
@@ -46,7 +55,7 @@ public class Invader {
     }
     
     public void shot() {
-    	x = (int)Math.floor(Math.random()*(max-min+1)+min);
+    //	x = (int)Math.floor(Math.random()*(max-min+1)+min);
         Frame.score++;
     }
     
