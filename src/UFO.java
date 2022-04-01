@@ -17,7 +17,7 @@ public class UFO {
 	private Image img; 	
 	private AffineTransform tx;
 	private ArrayList<Laser> laser = new ArrayList<Laser>();
-	private ArrayList<Invader> asteroids = new ArrayList<Invader>();
+	private ArrayList<Invader> invader = new ArrayList<Invader>();
 	public static boolean stop = true;
 	
 	

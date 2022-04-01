@@ -87,7 +87,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				g.drawRect(a.x +5, a.y, 40, 43);
 					
 					//collision between ufo and Invader	
-					if(ufo.getX() < a.getX() + 80 && ufo.getX() + 45 > a.getX()){
+					if(ufo.getX() + 30 < a.getX() + 80 && ufo.getX() + 70 > a.getX()){
 						if(ufo.getY() + 45 > a.getY() && ufo.getY() < a.getY() + 35){
 							invader.remove(i);
 							ufo.reset(); //set ship back to center ad set score to 0
