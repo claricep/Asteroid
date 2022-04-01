@@ -21,11 +21,25 @@ public class Invader extends Frame{
 	private int max = 420;
 	
 	public Invader() {
+<<<<<<< HEAD
 		x = 200;
 		y = 50;
+=======
+		x = 50;       //(int)Math.floor(Math.random()*(max-min+1)+min); //randomize location of asteroid
+		y = 0;
+>>>>>>> branch 'master' of https://github.com/claricep/Asteroid.git
 		img = getImage("/imgs/invader.gif");//load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
+		
+		 
+	}
+	
+	public Invader(int newX, int newY) {
+		x = newX;
+		y = newY;
+				 
+				
 	}
 	
 	public void paint(Graphics g) {
@@ -46,7 +60,11 @@ public class Invader extends Frame{
     }
     
     public void shot() {
+<<<<<<< HEAD
     	//x = (int)Math.floor(Math.random()*(max-min+1)+min);
+=======
+    //	x = (int)Math.floor(Math.random()*(max-min+1)+min);
+>>>>>>> branch 'master' of https://github.com/claricep/Asteroid.git
         Frame.score++;
     }
     

@@ -36,7 +36,7 @@ public class Background{
 
 	}
 	
-	/* update the picture variable location */
+	/* update the picture variable loccccation */
 	private void update() {
 		tx.setToTranslation(x, y);
 		tx.scale(3 , 3);
