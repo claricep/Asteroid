@@ -10,6 +10,6 @@ public class SleepTime {
     }
     
     public static int getSleepTime(int min, int max) {
-    	return (int) ((Math.random() * (max - min)) + min);
+    	return 1500;
     }
 }
