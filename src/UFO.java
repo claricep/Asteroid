@@ -17,7 +17,7 @@ public class UFO {
 	private Image img; 	
 	private AffineTransform tx;
 	private ArrayList<Laser> laser = new ArrayList<Laser>();
-	private ArrayList<Invader> invader = new ArrayList<Invader>();
+	private ArrayList<Invader> asteroids = new ArrayList<Invader>();
 	public static boolean stop = true;
 	
 	
@@ -89,8 +89,8 @@ public class UFO {
     	return laser;
     }
     
-    public ArrayList getInvader() {
-    	return invader;
+    public ArrayList getAsteroids() {
+    	return asteroids;
     }
       
     private void init(double a, double b) {

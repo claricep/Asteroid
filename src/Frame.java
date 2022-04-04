@@ -77,35 +77,17 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//UFO hit box
 		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
 		
+		 
+		 
 		//create invader
 			for(int i = 0; i < invader.size(); i ++) {
 				Invader a = (Invader) invader.get(i);
-				//creation of invaders in a row 
-				 if(a.getX() == 450){
-				 return; 
-				 }else{
-				//Invader a1 = new Invader(a.getY()-50, a.getX()); 
-					 a.x = a.getX()+50;
-					 a.y = a.getY();
-				  }
-				
-				
 				a.paint(g);
-<<<<<<< HEAD
-				
-				//bounce off walls
-				if(a.getX() > 400 || (a.getX() < 100)) {
-		    	  //  invader.getVx = -1;
-		    	}
-				
 				//invader hit box
-=======
-				//invader hit boxxx
->>>>>>> branch 'master' of https://github.com/claricep/Asteroid.git
 				g.drawRect(a.x +5, a.y, 40, 43);
 					
 					//collision between ufo and Invader	
-					if(ufo.getX() + 30 < a.getX() + 80 && ufo.getX() + 70 > a.getX()){
+					if(ufo.getX() < a.getX() + 80 && ufo.getX() + 45 > a.getX()){
 						if(ufo.getY() + 45 > a.getY() && ufo.getY() < a.getY() + 35){
 							invader.remove(i);
 							ufo.reset(); //set ship back to center ad set score to 0
