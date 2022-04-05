@@ -12,7 +12,7 @@ public class Invader {
 
 	public  int x;
 	public int y;
-	private double vx;
+	private int vx=5;
 	public int w;
 	public int h;
 	private Image img; 	
@@ -46,20 +46,22 @@ public class Invader {
     }
     
     public void shot() {
-    	x = (int)Math.floor(Math.random()*(max-min+1)+min);
         Frame.score++;
     }
     
     public void update() {
-    	//place asteroid back to the top of screen
+    	//place invader back to the top of screen
+    	x += vx;
+	
     	if(UFO.stop ) {
 			vx = 0;
-			y = -120;
     	}
     	
-    	x += vx;
-    	vx = 2;
-    	
+    	if(x > 400 || x < 50) {
+    	    vx = -vx;
+    	    y+=60;
+    	}
+    
     	tx.setToTranslation(x, y);
 		tx.scale(.15, .15);
     }
