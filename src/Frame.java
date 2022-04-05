@@ -39,22 +39,22 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		super.paintComponent(g);
 		
 		//paint objects
-				bg.paint(g);
-				ufo.paint(g);
+		bg.paint(g);
+		ufo.paint(g);
 				
 		//start screen
 		Font f1 = new Font(Font.SANS_SERIF, Font.BOLD, 20);
 		g.setFont(f1);
 		if(UFO.stop) {
 			g.setColor(Color.WHITE);   
-			g.drawString("Press 'Enter' to start", 130 , 250);
+			g.drawString("Press 'Enter' to start", 160 , 250);
 		}
 		
 		Font f2 = new Font(Font.SANS_SERIF, Font.ITALIC, 15);
 		g.setFont(f2);
 		if(UFO.stop) {
 			g.setColor(Color.WHITE);   
-			g.drawString("Use 'space bar' to shoot", 140 , 280);
+			g.drawString("Use 'space bar' to shoot", 180 , 280);
 		}
 		
 		//score
@@ -67,7 +67,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		
 		//paint lasers
-		for(int i = 0; i < lasers.size(); i ++) {
+		for(int i = 0; i < lasers.size(); i++) {
 			Laser l = (Laser) lasers.get(i);
 			l.paint(g);	
 			//laser hit box
@@ -76,8 +76,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		//UFO hit box
 		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
-		
-		 
 		 
 		//create invader
 			for(int i = 0; i < invader.size(); i ++) {
@@ -210,7 +208,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 									invader.clear();
 									break;
 								}					
-								Thread.sleep(SleepTime.getSleepTime(200,  2200));
+								Thread.sleep(SleepTime.getSleepTime(1500));
 								spawn();
 							}
 						} catch (Exception e) {
