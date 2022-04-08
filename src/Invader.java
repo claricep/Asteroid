@@ -12,13 +12,11 @@ public class Invader {
 
 	public  int x;
 	public int y;
-	private int vx=5;
+	private int vx = 1;
 	public int w;
 	public int h;
 	private Image img; 	
 	private AffineTransform tx;
-	private int min = 10;
-	private int max = 420;
 	
 	public Invader() {
 		x = 50;
