@@ -9,7 +9,7 @@ import java.net.URL;
 import javax.swing.JFrame;
 
 public class Background{
-	
+	//testing pushing 
 	//add location attributes
 	private int x;
 	private int y;
