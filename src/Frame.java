@@ -22,7 +22,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	UFO ufo = new UFO(225, 450);
 	private ArrayList<Invader> invader = new ArrayList<Invader>();
 	ArrayList lasers = ufo.getLaser();
-
+	
+	//sounds
+	Music shoot = new Music("shoot.wav", false);
+	Music background = new Music("background.wav", false);
+	Music gameOver = new Music("gameover.wav", false);
+	
+	
 	public static int score = 0;
 	
 	public void spawn() {
@@ -89,6 +95,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 						if(ufo.getY() + 45 > a.getY() && ufo.getY() < a.getY() + 35){
 							invader.remove(i);
 							ufo.reset(); //set ship back to center ad set score to 0
+							gameOver.play();
 						}
 					}
 			
@@ -100,8 +107,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				 for(int p = 0; p < invader.size() && i < lasers.size(); p++) {
 					 Laser tempL = (Laser) lasers.get(i);
 					 Invader tempA = (Invader) invader.get(p);
-					 	if(tempL.getX() < tempA.getX() + 80 && tempL.getX() + 12 > tempA.getX()){
-					 		if(tempL.getY() < tempA.getY() + 80 && tempL.getY() + 12 > tempA.getY()) {
+					 	if(tempL.getX() < tempA.getX() + 50 && tempL.getX() + 12 > tempA.getX()){
+					 		if(tempL.getY() < tempA.getY() + 50 && tempL.getY() + 12 > tempA.getY()) {
 								lasers.remove(i);
 								invader.remove(p);
 							 	score++;
@@ -128,8 +135,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		f.addMouseListener(this);
 		f.addKeyListener(this);
 		Timer t = new Timer(16, this);
-
-		
 		t.start();
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
@@ -193,11 +198,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			//shoot laser
 			if(arg0.getKeyCode()== 32) { //space bar
 				shoot();
+				shoot.play();
 			}
 			
 			if(arg0.getKeyCode() == 10) { //enter key	
 				//start screen
 				UFO.stop = false;
+				background.play();
 				//control invader to disappear when game ends
 				new Thread() {
 			        public void run(){
