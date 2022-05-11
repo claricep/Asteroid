@@ -69,17 +69,17 @@ public class UFO {
     	
 	// prevent going up from frame
     	if(x < -40) {
-		x = 500; 
-	}
-	if(x > 500) {
-		x = -40;
-	}
+    		x = 500; 
+    	}
+    	if(x > 500) {
+    		x = -40;
+    	}
 		
-	if(stop ) { //recenter UFO and reset score
-		x = 200;
-		this.y = 450;
-	    	Frame.score = 0;
-	}
+    	if(stop ) { //recenter UFO and reset score
+    		x = 200;
+    		this.y = 450;
+    		Frame.score = 0;
+    	}
 		
 		tx.setToTranslation(x, y);
 		tx.scale(.3 , .3);
