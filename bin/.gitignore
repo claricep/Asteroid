@@ -1,8 +1,14 @@
 /Background.class
-/Frame$1.class
 /Frame.class
 /Invader.class
 /Laser.class
+/Music,java
 /SleepTime.class
 /UFO.class
 /imgs/
+/Frame$1.class
+/Music.class
+/FileWriter.class
+/FileWriter$WriteToFile.class
+/File$WriteToFile.class
+/File.class

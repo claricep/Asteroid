@@ -14,6 +14,16 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.io.FileWriter;   
+import java.io.IOException;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
@@ -22,6 +32,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	UFO ufo = new UFO(225, 450);
 	private ArrayList<Invader> invader = new ArrayList<Invader>();
 	ArrayList lasers = ufo.getLaser();
+	ArrayList <Integer> scores = new ArrayList <>();
 	
 	//sounds
 	Music shoot = new Music("shoot.wav", false);
@@ -30,7 +41,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	
 	public static int score = 0;
-	
+	public static int maxScore = 0;
 	public void spawn() {
 		Invader i = new Invader();
 		invader.add(i);
@@ -44,6 +55,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
+		//tracking highscore
+			for(int i = 0; i < scores.size(); i++) {
+				if(scores.get(i) > maxScore) {
+					maxScore = scores.get(i); 
+					
+				}
+			}
+			
 		//paint objects
 		bg.paint(g);
 		ufo.paint(g);
@@ -69,6 +88,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(UFO.stop == false) {
 			g.setColor(Color.WHITE);   
 			g.drawString("Score : " + score + "", 20 , 30);
+			g.drawString("High Score : " + maxScore + "", 20 , 60);
 		}
 		
 		
@@ -96,11 +116,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 							invader.remove(i);
 							ufo.reset(); //set ship back to center ad set score to 0
 							gameOver.play();
+							scores.add(score);
 						}
 					}
 			
 		}	
 			
+		
 		//collision between laser and invader	
 		 if(! (invader.size() == 0) && !(lasers.size() == 0)) {
 			 for(int i = 0; i < lasers.size();i++) {
