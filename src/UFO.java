@@ -18,13 +18,14 @@ public class UFO {
 	private AffineTransform tx;
 	private ArrayList<Laser> laser = new ArrayList<Laser>();
 	private ArrayList<Invader> asteroids = new ArrayList<Invader>();
+	private ArrayList<Attack> attack = new ArrayList<Attack>();
 	public static boolean stop = true;
 	
 	
 	public UFO(int x, int y) {
 		this.x = x;
 		this.y = y;
-		img = getImage("/imgs/ufo.png"); //load the image for Tree
+		img = getImage("/imgs/test.gif"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); //initialize the location of the image
 	}
@@ -39,7 +40,7 @@ public class UFO {
 	}
 	
 	
-	public int getX(){
+	public static int getX(){
         return x;
     }
     
@@ -87,6 +88,10 @@ public class UFO {
 	
     public ArrayList getLaser() {
     	return laser;
+    }
+    
+    public ArrayList getAttack() {
+    	return attack;
     }
     
     public ArrayList getAsteroids() {
