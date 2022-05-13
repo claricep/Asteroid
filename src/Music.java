@@ -49,7 +49,7 @@ public class Music  implements Runnable  {
 			e.printStackTrace();
 		}
 	}
-	
+	//testing
 	public void play() {
 		start3();
 	}
