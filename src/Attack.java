@@ -9,16 +9,15 @@ import java.net.URL;
 
 public class Attack {
 
-	public static int x;
+	public  int x;
 	public int y;
 	private int vy;
 	private Image img; 	
 	private AffineTransform tx;
-	int time = 0;
 	
 	
 	public Attack () {
-		x= 200;
+		x= (int)Math.floor(Math.random()*(550-50+1)+50); //randomize location
 		y = 0;
 		img = getImage("/imgs/laser.png");//load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
@@ -49,12 +48,7 @@ public class Attack {
     
     //shoot
     public void shot() {
-    	time += 16;
-    	if(time > 6000) {
-    		x = 150;
-    		y = 100;
-    		update();
-    	}
+    	x = (int)Math.floor(Math.random()*(550-50+1)+50);
     }
     
     private void update() {
