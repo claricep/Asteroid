@@ -24,7 +24,7 @@ public class UFO {
 	public UFO(int x, int y) {
 		this.x = x;
 		this.y = y;
-		img = getImage("/imgs/ufo.png"); //load the image for Tree
+		img = getImage("/imgs/test.gif"); //load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); //initialize the location of the image
 	}
