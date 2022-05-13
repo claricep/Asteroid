@@ -10,6 +10,6 @@ public class SleepTime {
     }
     
     public static int getSleepTime(int sec) {
-    	return 1500;
+    	return 500;
     }
 }

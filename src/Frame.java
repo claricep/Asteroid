@@ -32,7 +32,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	UFO ufo = new UFO(225, 450);
 	private ArrayList<Invader> invader = new ArrayList<Invader>();
 	ArrayList lasers = ufo.getLaser();
+
 	ArrayList <Integer> scores = new ArrayList <>();
+
+	ArrayList ilasers = ufo.getAttack();
+
 	
 	//sounds
 	Music shoot = new Music("shoot.wav", false);
@@ -41,7 +45,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	
 	public static int score = 0;
+
 	public static int maxScore = 0;
+
+	int max = 10;
+	boolean level = false;
+	 
+
 	public void spawn() {
 		Invader i = new Invader();
 		invader.add(i);
@@ -51,6 +61,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		Laser i = new Laser();
 		lasers.add(i);
 	}
+	
+	public void Ishoot() {
+		Attack a = new Attack();
+		ilasers.add(a);
+	}
+	
+	
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -66,6 +83,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//paint objects
 		bg.paint(g);
 		ufo.paint(g);
+		
+		if(score == max) {
+			 invader.clear();
+			 level = true;
+		 }
 				
 		//start screen
 		Font f1 = new Font(Font.SANS_SERIF, Font.BOLD, 20);
@@ -91,6 +113,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			g.drawString("High Score : " + maxScore + "", 20 , 60);
 		}
 		
+		//level up
+		Font f3 = new Font(Font.SANS_SERIF, Font.ITALIC, 40);
+		g.setFont(f3);
+		if(level == true) {
+			g.setColor(Color.WHITE);   
+			g.drawString("NEXT LEVEL", 125 , 250);
+			//level = false;
+			//max += 10;
+		}
 		
 		//paint lasers
 		for(int i = 0; i < lasers.size(); i++) {
@@ -100,13 +131,22 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			//g.drawRect(l.getX(), l.getY(), 12, 12);
 		}
 		
+		//paint ilasers
+		for(int i = 0; i < ilasers.size(); i++) {
+			Attack il = (Attack) ilasers.get(i);
+			il.paint(g);	
+			
+		}
+		
 		//UFO hit box
-		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
+		//g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
+
 		 
 		//create invader
 			for(int i = 0; i < invader.size(); i ++) {
 				Invader a = (Invader) invader.get(i);
 				a.paint(g);
+				
 				//invader hit box
 				g.drawRect(a.x +5, a.y, 40, 43);
 					
@@ -139,6 +179,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				 }
 			 }
 		}
+		 
 		 
 	}
 
@@ -201,6 +242,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		// TODO Auto-generated method stub
 			System.out.println(arg0.getKeyCode());
 			
+			//invader laser
+			if(arg0.getKeyCode()==17) { //ctrl
+				Ishoot();
+			}
+			
 			//move left
 			if(arg0.getKeyCode()==37) { //left arrow
 				ufo.moveL();
@@ -237,7 +283,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 									invader.clear();
 									break;
 								}					
-								Thread.sleep(SleepTime.getSleepTime(1500));
+								Thread.sleep(SleepTime.getSleepTime(100));
 								spawn();
 							}
 						} catch (Exception e) {

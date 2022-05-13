@@ -17,7 +17,8 @@ public class UFO {
 	private Image img; 	
 	private AffineTransform tx;
 	private ArrayList<Laser> laser = new ArrayList<Laser>();
-	private ArrayList<Invader> invader = new ArrayList<Invader>();
+	private ArrayList<Invader> asteroids = new ArrayList<Invader>();
+	private ArrayList<Attack> attack = new ArrayList<Attack>();
 	public static boolean stop = true;
 	
 	
@@ -39,7 +40,7 @@ public class UFO {
 	}
 	
 	
-	public int getX(){
+	public static int getX(){
         return x;
     }
     
@@ -69,17 +70,17 @@ public class UFO {
     	
 	// prevent going up from frame
     	if(x < -40) {
-		x = 500; 
-	}
-	if(x > 500) {
-		x = -40;
-	}
+    		x = 500; 
+    	}
+    	if(x > 500) {
+    		x = -40;
+    	}
 		
-	if(stop ) { //recenter UFO and reset score
-		x = 200;
-		this.y = 450;
-	    	Frame.score = 0;
-	}
+    	if(stop ) { //recenter UFO and reset score
+    		x = 200;
+    		this.y = 450;
+    		Frame.score = 0;
+    	}
 		
 		tx.setToTranslation(x, y);
 		tx.scale(.3 , .3);
@@ -89,8 +90,12 @@ public class UFO {
     	return laser;
     }
     
-    public ArrayList getInvader() {
-    	return invader;
+    public ArrayList getAttack() {
+    	return attack;
+    }
+    
+    public ArrayList getAsteroids() {
+    	return asteroids;
     }
       
     private void init(double a, double b) {
