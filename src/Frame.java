@@ -31,8 +31,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	
 	public static int score = 0;
-	int max = 10;
-	boolean level = false;
+	private int max = 10;
+	public boolean level = false;
+	private int timer = 0;
 	 
 	
 	public void spawn() {
@@ -93,8 +94,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(level == true) {
 			g.setColor(Color.WHITE);   
 			g.drawString("NEXT LEVEL", 125 , 250);
-			//level = false;
-			//max += 10;
 		}
 		
 		//paint lasers
@@ -105,15 +104,28 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			//g.drawRect(l.getX(), l.getY(), 12, 12);
 		}
 		
-		//paint ilasers
+		//paint invader lasers
 		for(int i = 0; i < ilasers.size(); i++) {
 			Attack il = (Attack) ilasers.get(i);
-			il.paint(g);	
+			il.paint(g);
+			
+			//invader laser hit box
+			g.drawRect(il.getX(), il.getY(), 10, 10);
+			
+			//collision between ufo and invader laser	
+			if(ufo.getX() < il.getX() + 80 && ufo.getX() + 45 > il.getX()){
+				if(ufo.getY() + 45 > il.getY() && ufo.getY() < il.getY() + 35){
+					ufo.reset(); //set ship back to center ad set score to 0
+					gameOver.play();
+				}
+			}
+			
+			
 			
 		}
 		
 		//UFO hit box
-		//g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
+		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
 
 		 
 		//create invader
@@ -132,6 +144,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 							gameOver.play();
 						}
 					}
+				
 			
 		}	
 			
@@ -151,8 +164,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				 }
 			 }
 		}
-		 
-		 
 	}
 
 	
@@ -253,6 +264,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 								if(UFO.stop==true) { //if start screen is on
 								//clear all invader before breaking
 									invader.clear();
+									ilasers.clear();
 									break;
 								}					
 								Thread.sleep(SleepTime.getSleepTime(100));

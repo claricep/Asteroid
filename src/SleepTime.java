@@ -7,6 +7,7 @@ public class SleepTime {
     		System.out.println("sleep time\t" + sleepTime);  //check time intervals
     		Thread.sleep(sleepTime);
     	}
+    	
     }
     
     public static int getSleepTime(int sec) {

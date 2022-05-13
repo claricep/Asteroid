@@ -17,6 +17,7 @@ public class Invader {
 	public int h;
 	private Image img; 	
 	private AffineTransform tx;
+	private int time =0;
 	
 	public Invader() {
 		x = 50;
@@ -54,7 +55,8 @@ public class Invader {
     public void update() {
     	//place invader back to the top of screen
     	x += vx;
-	
+    	
+    	
     	if(UFO.stop ) {
 			vx = 0;
     	}
