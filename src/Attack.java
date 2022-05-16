@@ -80,4 +80,8 @@ public class Attack {
 		return tempImage;
 	}
 	
+<<<<<<< HEAD
 }      
+=======
+}
+>>>>>>> branch 'master' of https://github.com/claricep/Asteroid.git
