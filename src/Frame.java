@@ -14,6 +14,16 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import java.io.FileWriter;   
+import java.io.IOException;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
 	
@@ -22,7 +32,11 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	UFO ufo = new UFO(225, 450);
 	private ArrayList<Invader> invader = new ArrayList<Invader>();
 	ArrayList lasers = ufo.getLaser();
+
+	ArrayList <Integer> scores = new ArrayList <>();
+
 	ArrayList ilasers = ufo.getAttack();
+
 	
 	//sounds
 	Music shoot = new Music("shoot.wav", false);
@@ -31,11 +45,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	
 	public static int score = 0;
-	private int max = 10;
-	public boolean level = false;
-	private int timer = 0;
+
+	public static int maxScore = 0;
+
+	int max = 10;
+	boolean level = false;
 	 
-	
+
 	public void spawn() {
 		Invader i = new Invader();
 		invader.add(i);
@@ -56,6 +72,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	public void paint(Graphics g) {
 		super.paintComponent(g);
 		
+		//tracking highscore
+			for(int i = 0; i < scores.size(); i++) {
+				if(scores.get(i) > maxScore) {
+					maxScore = scores.get(i); 
+					
+				}
+			}
+			
 		//paint objects
 		bg.paint(g);
 		ufo.paint(g);
@@ -86,6 +110,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(UFO.stop == false) {
 			g.setColor(Color.WHITE);   
 			g.drawString("Score : " + score + "", 20 , 30);
+			g.drawString("High Score : " + maxScore + "", 20 , 60);
 		}
 		
 		//level up
@@ -94,6 +119,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(level == true) {
 			g.setColor(Color.WHITE);   
 			g.drawString("NEXT LEVEL", 125 , 250);
+			//level = false;
+			//max += 10;
 		}
 		
 		//paint lasers
@@ -104,10 +131,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			//g.drawRect(l.getX(), l.getY(), 12, 12);
 		}
 		
-		//paint invader lasers
+		//paint ilasers
 		for(int i = 0; i < ilasers.size(); i++) {
 			Attack il = (Attack) ilasers.get(i);
-			il.paint(g);
+			il.paint(g);	
 			
 			//invader laser hit box
 			g.drawRect(il.getX(), il.getY(), 10, 10);
@@ -120,14 +147,15 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 			}
 			
-			
-			
 		}
 		
 		//UFO hit box
-		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
+		//g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
 
 		 
+		
+		
+		
 		//create invader
 			for(int i = 0; i < invader.size(); i ++) {
 				Invader a = (Invader) invader.get(i);
@@ -142,12 +170,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 							invader.remove(i);
 							ufo.reset(); //set ship back to center ad set score to 0
 							gameOver.play();
+							scores.add(score);
 						}
 					}
-				
 			
 		}	
 			
+		
 		//collision between laser and invader	
 		 if(! (invader.size() == 0) && !(lasers.size() == 0)) {
 			 for(int i = 0; i < lasers.size();i++) {
@@ -164,6 +193,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				 }
 			 }
 		}
+		 
+		 
 	}
 
 	
@@ -264,7 +295,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 								if(UFO.stop==true) { //if start screen is on
 								//clear all invader before breaking
 									invader.clear();
-									ilasers.clear();
 									break;
 								}					
 								Thread.sleep(SleepTime.getSleepTime(100));

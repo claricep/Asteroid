@@ -80,4 +80,4 @@ public class Attack {
 		return tempImage;
 	}
 	
-}
+}      
