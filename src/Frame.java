@@ -45,22 +45,13 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	
 	
 	public static int score = 0;
-<<<<<<< HEAD
-=======
 	private int max = 10;
 	public boolean level = false;
 	private int timer = 0;
->>>>>>> branch 'master' of https://github.com/claricep/Asteroid.git
 
 	public static int maxScore = 0;
 
-<<<<<<< HEAD
-	int max = 10;
-	boolean level = false;
 	 
-
-=======
->>>>>>> branch 'master' of https://github.com/claricep/Asteroid.git
 	public void spawn() {
 		Invader i = new Invader();
 		invader.add(i);
@@ -170,11 +161,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 		
 		//UFO hit box
-<<<<<<< HEAD
 		//g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
-=======
 		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
->>>>>>> branch 'master' of https://github.com/claricep/Asteroid.git
 
 		 
 		
