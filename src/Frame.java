@@ -120,9 +120,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			g.setColor(Color.WHITE);   
 			g.drawString("NEXT LEVEL", 125 , 250);
 			time += 16;
-			if(time>2000) {
+			if(time>1500) {
 				level = false;
-				time = 0; 
+				time = 0;
+				max += 5;
 			}
 		}
 		
@@ -143,8 +144,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			g.drawRect(il.getX(), il.getY(), 10, 10);
 			
 			//collision between ufo and invader laser	
-			if(ufo.getX() < il.getX() + 80 && ufo.getX() + 45 > il.getX()){
-				if(ufo.getY() + 45 > il.getY() && ufo.getY() < il.getY() + 35){
+			if(ufo.getX() < il.getX() + 15 && ufo.getX() + 80 > il.getX()){
+				if(ufo.getY() + 25 > il.getY() && ufo.getY() < il.getY() + 20){
 					ufo.reset(); //set ship back to center ad set score to 0
 					gameOver.play();
 					start = true;
