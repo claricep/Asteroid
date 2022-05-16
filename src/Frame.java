@@ -1,117 +1,320 @@
-import java.awt.Image;
-import java.awt.geom.AffineTransform;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.GridLayout;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.AffineTransform;
-import java.net.URL;
 import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+import java.io.FileWriter;   
+import java.io.IOException;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class UFO {
+public class Frame extends JPanel implements ActionListener, MouseListener, KeyListener {
+	
+	//CREATE THE OBJECT (STEP 1) 
+	Background bg = new Background(0, 10);
+	UFO ufo = new UFO(225, 450);
+	private ArrayList<Invader> invader = new ArrayList<Invader>();
+	ArrayList lasers = ufo.getLaser();
 
-	public static int x, y;
-	private int vx;
-	private Image img; 	
-	private AffineTransform tx;
-	private ArrayList<Laser> laser = new ArrayList<Laser>();
-	private ArrayList<Invader> asteroids = new ArrayList<Invader>();
-	private ArrayList<Attack> attack = new ArrayList<Attack>();
-	public static boolean stop = true;
+	ArrayList <Integer> scores = new ArrayList <>();
+
+	ArrayList ilasers = ufo.getAttack();
+
+	
+	//sounds
+	Music shoot = new Music("shoot.wav", false);
+	Music background = new Music("background.wav", false);
+	Music gameOver = new Music("gameover.wav", false);
 	
 	
-	public UFO(int x, int y) {
-		this.x = x;
-		this.y = y;
-		img = getImage("/imgs/test.gif"); //load the image for Tree
-		tx = AffineTransform.getTranslateInstance(x, y );
-		init(x, y); //initialize the location of the image
+	public static int score = 0;
+	private int max = 10;
+	public boolean level = false;
+	private int timer = 0;
+
+	public static int maxScore = 0;
+
+	public void spawn() {
+		Invader i = new Invader();
+		invader.add(i);
 	}
+	
+	public void shoot() {
+		Laser i = new Laser();
+		lasers.add(i);
+	}
+	
+	public void Ishoot() {
+		Attack a = new Attack();
+		ilasers.add(a);
+	}
+	
 	
 	
 	public void paint(Graphics g) {
-		//these are the 2 lines of code needed draw an image on the screen
-		Graphics2D g2 = (Graphics2D) g;
-		//call update to update the actual picture location		
-		update();
-		g2.drawImage(img, tx, null);
-	}
-	
-	
-	public static int getX(){
-        return x;
-    }
-    
-    public int getY(){
-        return y;
-    }
-    
-    public int getVel(){
-        return vx;
-    }
-    
-    public void moveL() { //left arrow
-    	vx = -12;
-		x += vx;
-    }
-       
-    public void moveR() { //right arrow
-		vx = 12;
-		x += vx; 
-	}
-	
-     public void reset() { //start screen
-    	stop = true;
-    }
-    
-    private void update() {
-    	
-	// prevent going up from frame
-    	if(x < -40) {
-    		x = 500; 
-    	}
-    	if(x > 500) {
-    		x = -40;
-    	}
+		super.paintComponent(g);
 		
-    	if(stop ) { //recenter UFO and reset score
-    		x = 200;
-    		this.y = 450;
-    		Frame.score = 0;
-    	}
+		//tracking highscore
+			for(int i = 0; i < scores.size(); i++) {
+				if(scores.get(i) > maxScore) {
+					maxScore = scores.get(i); 
+					
+				}
+			}
+			
+		//paint objects
+		bg.paint(g);
+		ufo.paint(g);
 		
-		tx.setToTranslation(x, y);
-		tx.scale(.3 , .3);
-    }
-	
-    public ArrayList getLaser() {
-    	return laser;
-    }
-    
-    public ArrayList getAttack() {
-    	return attack;
-    }
-    
-    public ArrayList getAsteroids() {
-    	return asteroids;
-    }
-      
-    private void init(double a, double b) {
-		tx.setToTranslation(a, b);
-		tx.scale(.5, .5);
+		if(score == max) {
+			 invader.clear();
+			 level = true;
+		 }
+				
+		//start screen
+		Font f1 = new Font(Font.SANS_SERIF, Font.BOLD, 20);
+		g.setFont(f1);
+		if(UFO.stop) {
+			g.setColor(Color.WHITE);   
+			g.drawString("Press 'Enter' to start", 160 , 250);
+		}
+		
+		Font f2 = new Font(Font.SANS_SERIF, Font.ITALIC, 15);
+		g.setFont(f2);
+		if(UFO.stop) {
+			g.setColor(Color.WHITE);   
+			g.drawString("Use 'space bar' to shoot", 180 , 280);
+		}
+		
+		//score
+		Font gg = new Font(Font.SANS_SERIF, Font.BOLD, 15);
+		g.setFont(gg);
+		if(UFO.stop == false) {
+			g.setColor(Color.WHITE);   
+			g.drawString("Score : " + score + "", 20 , 30);
+			g.drawString("High Score : " + maxScore + "", 20 , 60);
+		}
+		
+		//level up
+		Font f3 = new Font(Font.SANS_SERIF, Font.ITALIC, 40);
+		g.setFont(f3);
+		if(level == true) {
+			g.setColor(Color.WHITE);   
+			g.drawString("NEXT LEVEL", 125 , 250);
+		}
+		
+		//paint lasers
+		for(int i = 0; i < lasers.size(); i++) {
+			Laser l = (Laser) lasers.get(i);
+			l.paint(g);	
+			//laser hit box
+			//g.drawRect(l.getX(), l.getY(), 12, 12);
+		}
+		
+		//paint invader lasers
+		for(int i = 0; i < ilasers.size(); i++) {
+			Attack il = (Attack) ilasers.get(i);
+			il.paint(g);
+			
+			//invader laser hit box
+			g.drawRect(il.getX(), il.getY(), 10, 10);
+			
+			//collision between ufo and invader laser	
+			if(ufo.getX() < il.getX() + 80 && ufo.getX() + 45 > il.getX()){
+				if(ufo.getY() + 45 > il.getY() && ufo.getY() < il.getY() + 35){
+					ufo.reset(); //set ship back to center ad set score to 0
+					gameOver.play();
+				}
+			}
+			
+			
+			
+		}
+		
+		//UFO hit box
+		g.drawRect(ufo.getX(), ufo.getY(), 80, 45);
+
+		 
+		//create invader
+			for(int i = 0; i < invader.size(); i ++) {
+				Invader a = (Invader) invader.get(i);
+				a.paint(g);
+				
+				//invader hit box
+				g.drawRect(a.x +5, a.y, 40, 43);
+					
+					//collision between ufo and Invader	
+					if(ufo.getX() < a.getX() + 80 && ufo.getX() + 45 > a.getX()){
+						if(ufo.getY() + 45 > a.getY() && ufo.getY() < a.getY() + 35){
+							invader.remove(i);
+							ufo.reset(); //set ship back to center ad set score to 0
+							gameOver.play();
+							scores.add(score);
+						}
+					}
+				
+			
+		}	
+			
+		
+		//collision between laser and invader	
+		 if(! (invader.size() == 0) && !(lasers.size() == 0)) {
+			 for(int i = 0; i < lasers.size();i++) {
+				 for(int p = 0; p < invader.size() && i < lasers.size(); p++) {
+					 Laser tempL = (Laser) lasers.get(i);
+					 Invader tempA = (Invader) invader.get(p);
+					 	if(tempL.getX() < tempA.getX() + 50 && tempL.getX() + 12 > tempA.getX()){
+					 		if(tempL.getY() < tempA.getY() + 50 && tempL.getY() + 12 > tempA.getY()) {
+								lasers.remove(i);
+								invader.remove(p);
+							 	score++;
+					 		}
+						 }
+				 }
+			 }
+		}
 	}
 
-	private Image getImage(String path) {
-		Image tempImage = null;
-		try {
-			URL imageURL = Background.class.getResource(path);
-			tempImage = Toolkit.getDefaultToolkit().getImage(imageURL);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return tempImage;
+	
+	public static void main(String[] arg) {
+		Frame f = new Frame();
 	}
 	
+	public Frame() {
+		JFrame f = new JFrame("Space Invaders");
+		f.setSize(new Dimension(500, 600));
+		f.setBackground(Color.blue);
+		f.add(this);
+		f.setResizable(false);
+		f.setLayout(new GridLayout(1,2));
+		f.addMouseListener(this);
+		f.addKeyListener(this);
+		Timer t = new Timer(16, this);
+		t.start();
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		f.setVisible(true);
+		
+		
+	}
+	
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+	
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		repaint();
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+			System.out.println(arg0.getKeyCode());
+			
+			//invader laser
+			if(arg0.getKeyCode()==17) { //ctrl
+				Ishoot();
+			}
+			
+			//move left
+			if(arg0.getKeyCode()==37) { //left arrow
+				ufo.moveL();
+			}
+			if(arg0.getKeyCode()==65) { // right arrow
+				ufo.moveL();
+			}
+			
+			//move right
+			if(arg0.getKeyCode()==39) { // a key
+				ufo.moveR();
+			}
+			if(arg0.getKeyCode()==68) { //d key
+				ufo.moveR();
+			}
+			
+			//shoot laser
+			if(arg0.getKeyCode()== 32) { //space bar
+				shoot();
+				shoot.play();
+			}
+			
+			if(arg0.getKeyCode() == 10) { //enter key	
+				//start screen
+				UFO.stop = false;
+				background.play();
+				//control invader to disappear when game ends
+				new Thread() {
+			        public void run(){
+						try {
+							while (true) {
+								if(UFO.stop==true) { //if start screen is on
+								//clear all invader before breaking
+									invader.clear();
+									ilasers.clear();
+									break;
+								}					
+								Thread.sleep(SleepTime.getSleepTime(100));
+								spawn();
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+			        }
+				}.start();
+			}
+	}
+	
+	
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
