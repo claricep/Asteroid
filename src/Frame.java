@@ -32,10 +32,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	UFO ufo = new UFO(225, 450);
 	private ArrayList<Invader> invader = new ArrayList<Invader>();
 	ArrayList lasers = ufo.getLaser();
-
-	ArrayList <Integer> scores = new ArrayList <>();
-
 	ArrayList ilasers = ufo.getAttack();
+	ArrayList <Integer> scores = new ArrayList <>();
 
 	
 	//sounds
@@ -48,6 +46,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	private int max = 10;
 	public boolean level = false;
 	private int timer = 0;
+	private boolean start;
 
 	public static int maxScore = 0;
 
@@ -67,7 +66,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		ilasers.add(a);
 	}
 	
-	
+	int time = 0;
 	
 	public void paint(Graphics g) {
 		super.paintComponent(g);
@@ -83,11 +82,6 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//paint objects
 		bg.paint(g);
 		ufo.paint(g);
-		
-		if(score == max) {
-			 invader.clear();
-			 level = true;
-		 }
 				
 		//start screen
 		Font f1 = new Font(Font.SANS_SERIF, Font.BOLD, 20);
@@ -95,6 +89,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(UFO.stop) {
 			g.setColor(Color.WHITE);   
 			g.drawString("Press 'Enter' to start", 160 , 250);
+			start = false;
 		}
 		
 		Font f2 = new Font(Font.SANS_SERIF, Font.ITALIC, 15);
@@ -116,9 +111,19 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		//level up
 		Font f3 = new Font(Font.SANS_SERIF, Font.ITALIC, 40);
 		g.setFont(f3);
+		
+		if(score == max) {
+			 invader.clear();
+			 level = true;
+		 }
 		if(level == true) {
 			g.setColor(Color.WHITE);   
 			g.drawString("NEXT LEVEL", 125 , 250);
+			time += 16;
+			if(time>2000) {
+				level = false;
+				time = 0; 
+			}
 		}
 		
 		//paint lasers
@@ -142,19 +147,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				if(ufo.getY() + 45 > il.getY() && ufo.getY() < il.getY() + 35){
 					ufo.reset(); //set ship back to center ad set score to 0
 					gameOver.play();
-				}
-			}
-			
-			
-			
-			//invader laser hit box
-			g.drawRect(il.getX(), il.getY(), 10, 10);
-			
-			//collision between ufo and invader laser	
-			if(ufo.getX() < il.getX() + 80 && ufo.getX() + 45 > il.getX()){
-				if(ufo.getY() + 45 > il.getY() && ufo.getY() < il.getY() + 35){
-					ufo.reset(); //set ship back to center ad set score to 0
-					gameOver.play();
+					start = true;
 				}
 			}
 			
@@ -183,6 +176,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 							ufo.reset(); //set ship back to center ad set score to 0
 							gameOver.play();
 							scores.add(score);
+							start= true;
 						}
 					}
 				
@@ -294,8 +288,9 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				shoot.play();
 			}
 			
-			if(arg0.getKeyCode() == 10) { //enter key	
+			if(arg0.getKeyCode() == 10 && start == false) { //enter key	
 				//start screen
+				start = true;
 				UFO.stop = false;
 				background.play();
 				//control invader to disappear when game ends
@@ -311,6 +306,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 								}					
 								Thread.sleep(SleepTime.getSleepTime(100));
 								spawn();
+								Ishoot();
 							}
 						} catch (Exception e) {
 							e.printStackTrace();

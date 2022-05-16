@@ -14,11 +14,12 @@ public class Attack {
 	private int vy;
 	private Image img; 	
 	private AffineTransform tx;
+	private static boolean stop = true;
 	
 	
 	public Attack () {
-		x= (int)Math.floor(Math.random()*(550-50+1)+50); //randomize location
-		y = 0;
+		x= (int)Math.floor(Math.random()*(550-50+1)+50);
+		y = (int)Math.floor(Math.random()*(100-60+1)+60);
 		img = getImage("/imgs/laser.png");//load the image for Tree
 		tx = AffineTransform.getTranslateInstance(x, y );
 		init(x, y); 				//initialize the location of the image
@@ -46,13 +47,17 @@ public class Attack {
     	return vy;
     }
     
+    public void reset() { //start screen
+    	stop = true;
+    }
+    
     //shoot
     public void shot() {
     	x = (int)Math.floor(Math.random()*(550-50+1)+50);
     }
     
     private void update() {
-    	vy = 8;
+    	vy = 4;
     	y += vy;
     	
     	//get rid of laser when game resets
