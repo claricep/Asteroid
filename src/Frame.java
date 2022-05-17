@@ -49,6 +49,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	private boolean start;
 	private boolean loser = false;
 	private boolean stall = false;
+	public int entcount = 0;
+	public boolean bmusic = false;
 
 	public static int maxScore = 0;
 
@@ -183,6 +185,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				}
 			}
 			
+
+			
 		}
 		
 		//UFO hit box
@@ -196,7 +200,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 				a.paint(g);
 				
 				//invader hit box
-				g.drawRect(a.x +5, a.y, 40, 43);
+		//		g.drawRect(a.x +5, a.y, 40, 43);
 					
 					//collision between ufo and Invader	
 					if(ufo.getX() < a.getX() + 70 && ufo.getX() + 45 > a.getX()){
@@ -319,10 +323,14 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			}
 			
 			if(arg0.getKeyCode() == 10 && start == false) { //enter key	
-				//start screen
+				//start screen	
 				start = true;
 				UFO.stop = false;
-				background.play();
+				entcount++;
+				bmusic = true;
+		      if(entcount <= 1 && bmusic == true) {
+		    		background.play();
+		        }
 				//control invader to disappear when game ends
 				new Thread() {
 			        public void run(){
@@ -342,8 +350,10 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 							e.printStackTrace();
 						}
 			        }
+		
 				}.start();
 			}
+	
 	}
 	
 	
