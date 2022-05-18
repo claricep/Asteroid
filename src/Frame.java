@@ -51,6 +51,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	private boolean stall = false;
 	public int entcount = 0;
 	public boolean bmusic = false;
+	int levelcomp = 0;
 
 	public static int maxScore = 0;
 
@@ -112,6 +113,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 			g.setColor(Color.WHITE);   
 			g.drawString("Score : " + score + "", 20 , 30);
 			g.drawString("High Score : " + maxScore + "", 20 , 60);
+			g.drawString("Level : " + (levelcomp / 90) + "", 20, 90);
 		}
 		
 		//level up
@@ -125,6 +127,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		if(level == true) {
 			g.setColor(Color.WHITE);   
 			g.drawString("NEXT LEVEL", 125 , 250);
+			levelcomp+=1;
 			invader.clear();
 			ilasers.clear();
 			lasers.clear();
