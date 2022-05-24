@@ -12,12 +12,11 @@ public class Invader {
 
 	public  int x;
 	public  int y;
-	private int vx = 5;
+	public int vx = 5;
 	public int w;
 	public int h;
 	private Image img; 	
 	private AffineTransform tx;
-	private int time =0;
 	
 	public Invader() {
 		x = 50;
@@ -55,8 +54,7 @@ public class Invader {
     public void update() {
     	//place invader back to the top of screen
     	x += vx;
-    	
-    	
+	
     	if(UFO.stop ) {
 			vx = 0;
     	}
@@ -68,6 +66,9 @@ public class Invader {
     
     	tx.setToTranslation(x, y);
 		tx.scale(.15, .15);
+    }
+    public void speedUp() {
+    	vx += 5;
     }
     
     private void init(double a, double b) {
