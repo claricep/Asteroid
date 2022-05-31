@@ -4,7 +4,7 @@
 
   
 ## Project Description
-Asteroids is a single player game that focuses on opbtaining as many points possible by shooting flying asteroids. The user controls a ufo using keys (listed below) and needs to avoid being hit by the invaders whilst shooting at them with lasers. For each invader thats hit, the user earns one point. However, if the ufo collides with an invader, the game is over and the players score restarts at 0. The score can be found at the top left of the game screen. We also have a highest score counter which displays the highest score that the player has earned. There is a level counter as well this shows the user what level they were able to reach. The goal is to be able to reach the highest level possible.
+Asteroids is a single player game that focuses on opbtaining as many points possible by shooting flying asteroids. The user controls a ufo using keys (listed below) and needs to avoid being hit by the invaders whilst shooting at them with lasers. For each invader thats hit, the user earns one point. However, if the ufo collides with an invader, the game is over and the players score restarts at 0. The score can be found at the top left of the game screen. We also have a highest score counter which displays the highest score that the player has earned. There is a level counter as well this shows the user what level they were able to reach, which updates as you play. The goal is to be able to reach the highest level possible.
 
 ## Usage
 Arrow keys: move ufo left and right
@@ -53,6 +53,7 @@ This method is used to draw objects on the screen and updates their position whe
 This is one of the most major parts of the game and contributes to the overall game play. With the use of if statements, the code detects when the an object overlaps with another setting off a reaction. For example, the laser collides with an invader, rewarding them with one point. Additionally, if the ufo comes in contact with an invader, the game restarts back to the start screen, the score resets back to 0, and the ufo is placed back at the center of the screen. 
 
 ![Screenshot (15)](https://user-images.githubusercontent.com/70664877/167710648-e7c4af4a-8064-46de-9083-622cf5767188.png)
+
 
 ## Game Over
 When the users ufo collides with an invader, a reset method is pulled from the ufo class which causes the start screen to return. Inside of the collision if statement between the ufo and invader, the score is set equal to 0. The position of the ufo is placed back to its starting position ready for the next game. Additionally, all movement is stopped which is achieved by setting the velocity for all moving objects back to 0. For the invader, in order to prevent them to continue falling down the screen, all invader are cleared and same goes for the lasers. 
