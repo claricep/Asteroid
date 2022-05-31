@@ -1,5 +1,4 @@
 # __SPACE INVADERS__
-//to see attached objects -> use dark mode
   
 ![Screenshot (8)](https://user-images.githubusercontent.com/70664877/167709331-862d2e3c-ea88-45dd-b9af-9a377f61fd4c.png)
 
