@@ -50,12 +50,12 @@ This method is used to draw objects on the screen and updates their position whe
 ![Screenshot (23)](https://user-images.githubusercontent.com/70664877/167711859-fb0f8c55-9f23-458b-a290-7aaff1236058.png)
 
 ## Collision
-This is one of the most major parts of the game and contributes to the overall game play. With the use of if statements, the code detects when the an object overlaps with another setting off a reaction. For example, the laser collides with an asteroid, rewarding them with one point. Additionally, if the spaceship comes in contact with an asteroid, the game restarts back to the start screen, the score resets back to 0, and the spaceship is placed back at the center of the screen. 
+This is one of the most major parts of the game and contributes to the overall game play. With the use of if statements, the code detects when the an object overlaps with another setting off a reaction. For example, the laser collides with an invader, rewarding them with one point. Additionally, if the ufo comes in contact with an invader, the game restarts back to the start screen, the score resets back to 0, and the ufo is placed back at the center of the screen. 
 
 ![Screenshot (15)](https://user-images.githubusercontent.com/70664877/167710648-e7c4af4a-8064-46de-9083-622cf5767188.png)
 
 ## Game Over
-When the users spaceship collides with an asteroid, a reset method is pulled from the spaceship class which causes the start screen to return. Inside of the collision if statement between the spaceship and asteroid, the score is set equal to 0. The position of the spaceship is placed back to its starting position ready for the next game. Additionally, all movement is stopped which is achieved by setting the velocity for all moving objects back to 0. For the asteroid, in order to prevent them to continue falling down the screen, all asteroids are cleared. 
+When the users ufo collides with an invader, a reset method is pulled from the ufo class which causes the start screen to return. Inside of the collision if statement between the ufo and invader, the score is set equal to 0. The position of the ufo is placed back to its starting position ready for the next game. Additionally, all movement is stopped which is achieved by setting the velocity for all moving objects back to 0. For the invader, in order to prevent them to continue falling down the screen, all invader are cleared and same goes for the lasers. 
 
 ![Screenshot (16)](https://user-images.githubusercontent.com/70664877/167711348-2b6a1073-0bbe-4bdb-8f1a-af2aa962e2dd.png)
 ![Screenshot (19)](https://user-images.githubusercontent.com/70664877/167711038-64cd33ee-226e-49e4-a085-7a6a38b74cd0.png)
@@ -75,7 +75,7 @@ Objects are created individually or with the use of an array. Individual objects
 
 
 ## Roadmap
-Future updates are unlikely but if I were too, I wanted the asteroids to turn red for a split second after colliding with the laser. Since there are only 2 colors in this game, I think it would make it a bit more engaging with the addition of a third. Additonally, I would want to change the fact that the asteroids begin falling a bit below the top of the screen. I would change it so they begin falling above the users view so it looks more smooth. There are also some instances where the asteroids overlap which would be something I would want to fix. I think one fun thing to add would be to have varing sizes for the asteroids and awarding a set amount of points according to the size.
+Future updates are unlikely but if we were too, we wanted the ivaders to turn red for a split second after colliding with the laser. Since there are only 2 colors in this game, I think it would make it a bit more engaging with the addition of a third. 
 
 ## Contribution
 Anyone is welcome to contribute their own code.
