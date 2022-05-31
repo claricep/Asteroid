@@ -5,12 +5,12 @@
 
   
 ## Project Description
-Asteroids is a single player game that focuses on opbtaining as many points possible by shooting flying asteroids. The user controls a spaceship using keys (listed below) and needs to avoid being hit by the asteroids whilst shooting at them with lasers. For each asteroid thats hit, the user earns one point. However, if the spaceship collides with an asteroid, the game is over and the players score restarts at 0. The score can be found at the top left of the game screen. 
+Asteroids is a single player game that focuses on opbtaining as many points possible by shooting flying asteroids. The user controls a ufo using keys (listed below) and needs to avoid being hit by the invaders whilst shooting at them with lasers. For each invader thats hit, the user earns one point. However, if the ufo collides with an invader, the game is over and the players score restarts at 0. The score can be found at the top left of the game screen. We also have a highest score counter which displays the highest score that the player has earned. There is a level counter as well this shows the user what level they were able to reach. The goal is to be able to reach the highest level possible.
 
 ## Usage
-Arrow keys: move spaceship left and right
+Arrow keys: move ufo left and right
 
-WASD keys: move spaceship left and right
+WASD keys: move ufo left and right
 
 Enter key: start game
 
@@ -26,12 +26,12 @@ This class focuses on the ufo, the character that the user controls. There is on
 ![spaceship](https://user-images.githubusercontent.com/70664877/167707583-6f87e484-4ac6-4ab9-b1be-bca45f0d0ccc.png)
 
 ### Invaders Class
-The invaders is created with an array in oder to have multiple comets falling down the screen at once. This is the object that the user is trying to avoid and shooting to obtain points. This image is produced by myself.
+The invaders is created with an array in oder to have multiple comets falling down the screen at once. This is the object that the user is trying to avoid and shooting to obtain points. This image is produced by our team.
 
 ![shot (1)](https://user-images.githubusercontent.com/70664877/167707842-492ec3cd-9fdf-4fff-b0fb-3c8595ce457e.gif)
 
 ### Laser Class
-The laser object is one that is shot from the spaceship and the timing of the shooting is in the users control. This object is created with the use of an array to allow the player to shoot multiple laser on screen.
+The laser object is one that is shot from the ufo and the timing of the shooting is in the users control. This object is created with the use of an array to allow the player to shoot multiple laser on screen.
 
 ![laser](https://user-images.githubusercontent.com/70664877/148605929-099cf4b8-3cce-4564-93d0-5d8ba970e52d.png)
 
@@ -41,12 +41,12 @@ One background image is used fill the entire screen. This image represents space
 ![bg](https://user-images.githubusercontent.com/70664877/167707742-062834a1-df5a-49fb-91be-4f854e3dfaab.png)
 
 ### SleepTime Class
-This class is used to control the dropping of the asteroids with the use of a timer. An asteroid is dropped from the top of the screen randomly given the range of .2 to 2.5 seconds. A thread is used to allow asteroids to fall continously with the timer _and_ have the user shoot lasers.
+This class is used to control the dropping of the invaders with the use of a timer. An invader is dropped from the top of the screen randomly given the range of .6 to 1 second. A thread is used to allow invaders to fall continously with the timer _and_ have the user shoot lasers.
 
 ![Screenshot (10)](https://user-images.githubusercontent.com/70664877/167709829-c9fb90df-cfa6-4ffc-83fa-10b35ba1f456.png)
 
 ## Paint method
-This method is used to draw objects on the screen and updates their position when necessary. Just one spaceship and background are painted for this game. An asteroid is called randomly multiple times from a range of .2 to 2.5 seconds. For the laser, one is painted for each time the user shoots (clicks space bar). Both the asteroid and laser are called with the use of an array and a for loop. The starting screen text and score are also under this method, each with customized fonts.
+This method is used to draw objects on the screen and updates their position when necessary. Just one ufo and background are painted for this game. An invader is called randomly multiple times from a range of .6 to 1 second. For the laser, one is painted for each time the user shoots (clicks space bar). Both the invader and laser are called with the use of an array and a for loop. The starting screen text and score are also under this method, each with customized fonts.
 
 ![Screenshot (23)](https://user-images.githubusercontent.com/70664877/167711859-fb0f8c55-9f23-458b-a290-7aaff1236058.png)
 
